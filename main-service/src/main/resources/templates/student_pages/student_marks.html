@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Расписание</title>
+  <script>
+    function submitForm(action) {
+      document.getElementById('marks_form').action = action;
+      document.getElementById('marks_form').submit();
+    }
+  </script>
+</head>
+
+<body>
+<h2>Выберите студента и предмет, чтобы посмотреть оценки</h2>
+
+<form id="marks_form" action="#" th:action="@{/viewMarks}" method="post">
+  <!-- Ваши поля формы здесь -->
+  <div>
+    <label>Выберите ученика:</label>
+    <label>
+      <select name="studentId">
+        <option th:each="student : ${students}" th:text="${student.name}" th:value="${student.id}"></option>
+      </select>
+    </label>
+  </div>
+
+  <div>
+    <label>Выберите предмет:</label>
+    <label>
+      <select name="predmetId">
+        <option th:each="predmet : ${predmets}" th:text="${predmet.title}" th:value="${predmet.id}"></option>
+      </select>
+    </label>
+  </div>
+
+  <h3>Введите дату и время для поиска</h3>
+  <label for="lessonTimeFrom">От:</label>
+  <input type="datetime-local" id="lessonTimeFrom" required name="lessonTimeFrom" />
+  <br> <br>
+  <label for="lessonTimeTo">До:</label>
+  <input type="datetime-local" id="lessonTimeTo" required name="lessonTimeTo" />
+  <br>
+  <br>
+  <button type="button" onclick="submitForm('/viewMarks');">Найти оценки</button>
+  <br>
+  <br>
+  <button type="button" onclick="submitForm('/student/studentsReport');">средний балл за предмет в pdf</button>
+</form>
+<br>
+<a href="/parent">На главную страницу</a>
+</body>
+
+</html>

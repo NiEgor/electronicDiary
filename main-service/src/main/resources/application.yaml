@@ -1,9 +1,12 @@
 server:
   port: 8080
+  error:
+      whitelabel:
+        enabled: false
 spring:
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL10Dialect
@@ -13,10 +16,13 @@ spring:
     init:
       mode: always
   datasource:
-    url: ${SPRING_DATASOURCE_MAIN:jdbc:postgresql://localhost:5432/ElectronicDiary}
+    url: ${SPRING_DATASOURCE_MAIN:jdbc:postgresql://localhost:5433/ElectronicDiary}
     username: ${POSTGRES_USER:user}
     password: ${POSTGRES_PASSWORD:pass}
     driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
 logging:
   level:
     org:
@@ -33,3 +39,5 @@ logging:
         jpa:
           JpaTransactionManager: DEBUG
 
+services:
+  reportUrl: http://report-service:7070

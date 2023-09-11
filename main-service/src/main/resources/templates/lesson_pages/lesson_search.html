@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Lesson</title>
+</head>
+<body>
+<h2>Поиск урока</h2>
+<form method="get" action="/lesson/search">
+
+  <label for="teacherName">ФИО учителя:</label>
+  <select id="teacherName" name="teacherName">
+    <option th:each="teacher : ${teachers}" th:value="${teacher.name}" th:text="${teacher.name}"></option>
+  </select>
+  <br> <br>
+
+  <label for="className">Название класса:</label>
+  <select id="className" name="className">
+    <option th:each="class : ${classes}" th:value="${class.title}" th:text="${class.title}"></option>
+  </select>
+  <br> <br>
+
+  <label for="subjectName">Название предмета:</label>
+  <select id="subjectName" name="subjectName">
+    <option th:each="predmet : ${predmets}" th:value="${predmet.title}" th:text="${predmet.title}"></option>
+  </select>
+  <br> <br>
+
+  <label for="lessonTime">Дата и время урока:</label>
+  <input type="datetime-local" id="lessonTime" required name="lessonTime" />
+  <br> <br>
+
+  <button type="submit">Поиск</button>
+
+</form>
+<br>
+<a href="/admin">На главную страницу</a>
+</body>
+</html>
